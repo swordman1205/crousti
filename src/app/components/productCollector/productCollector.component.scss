@@ -1,0 +1,109 @@
+.header {
+  height: 55px;
+  background-color: darkorange;
+  
+  > div {
+    height: 100%;
+
+    .form-control {
+      margin-top: 10px;
+    }
+
+    .close-btn {
+      color: white;
+      margin-top: 15px;
+      margin-left: 30px;
+      margin-right: 15px;
+    }
+
+    .search-box {
+      position: relative;
+
+      i {
+        position: absolute;
+        top: 20px;
+        right: 10px;
+        font-size: 16px;
+      }
+    }
+  }
+}
+
+.product-detail {
+  .card {
+    margin-bottom: 5px;
+    .card-block {
+      height: 25vh;
+      overflow: hidden;
+      padding: 0;
+
+      img {
+        width: 100%;
+      }
+
+      .detail {
+        position: absolute;
+        bottom: 0;
+        padding: 5px 10px;
+
+        .background {
+          position: absolute;
+          top: 0;
+          bottom: 0;
+          left: 0;
+          right: 0;
+          background-color: white;
+          opacity: 0.6;
+        }
+
+        .name {
+          position: relative;
+          font-size: 15px;
+          font-weight: 500;
+        }
+
+        .description {
+          position: relative;
+          font-size: 12px;
+        }
+      }
+    }
+  }
+
+  .add-to-cabinet {
+    text-decoration: none;
+    color: white;
+    padding: 5px 10px;
+    background-color: darkorange;
+    display: inline-flex;
+    font-size: 13px;
+    margin-top: 5px;
+
+    i {
+      font-size: 20px;
+    }
+  }
+}
+
+.product-gallery {
+  height: -webkit-calc(50vh - 100px);
+  height: calc(50vh - 100px);
+  overflow-y: auto;
+
+  .product {
+    display: -webkit-flex;
+    display: flex;
+
+    .card {
+      cursor: pointer;
+      img {
+        width: 100%;
+      }
+      &.active {
+        border: 1px solid orange;
+      }
+    }
+  }
+}
+
+

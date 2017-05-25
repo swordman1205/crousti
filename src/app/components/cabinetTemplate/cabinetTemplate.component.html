@@ -1,0 +1,104 @@
+<header class="navbar pr-2 pl-2">
+  <h5 class="thin-word-2 mt-1 mb-0">{{shopName}}</h5>
+  <a class="nav navbar-nav ml-auto home" routerLink="/"><i class="fa fa-home"></i></a>
+</header>
+<div class="container pt-2" [hidden]="step != 1">
+  <h4 class="title mb-1 thin-word-2">Create a cabinet</h4>
+  <h5 class="sub-title thin-word-2">Specifications</h5>
+  <div class="card mb-2">
+    <div class="card-block">
+      <div class="row">
+        <div class="col-sm-6">
+          <div class="input-group flex-vertical-center">
+            <span class="mr-1">Cabinet Length</span>
+            <input type="number" min="1" max="10" class="form-control col-sm-6" placeholder="length" [(ngModel)]="cabinetLength"/>
+            <span class="ml-1">m</span>
+          </div>
+        </div>
+        <div class="col-sm-6">
+          <div class="input-group flex-vertical-center">
+            <span class="mr-1">Vertical units</span>
+            <select class="form-control col-sm-6" [(ngModel)]="verticalUnit">
+              <option value="2">2</option>
+            </select>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <h5 class="sub-title thin-word-2">Select a template</h5>
+  <div class="row">
+    <div class="col-sm-6" *ngFor="let template of templates">
+      <div class="card" (click)="selectTemplate(template)" [class.active]="selectedTemp == template">
+        <div class="card-block">
+          <h6 class="text-muted text-uppercase mb-1">{{template.name}}</h6>
+          <table class="template" border="2">
+            <tr class="cells" *ngFor="let row of template.data">
+              <td class="cell" *ngFor="let cell of row">
+                <div class="panel" *ngFor="let j of getRepeatList(cell.type[1])" [style.height]="100/cell.type[1] + '%'">
+                  <div class="pull-left area" *ngFor="let i of getRepeatList(cell.type[0])" [style.width]="100/cell.type[0] + '%'" [style.height]="'100%'"></div>
+                </div>
+              </td>
+            </tr>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="container customize-panel" [hidden]="step != 2">
+  <div class="card mb-0">
+    <div class="card-block">
+      <h4 class="title thin-word-2">Customize your cabinet</h4>
+      <h5 class="sub-title thin-word-2 text-muted mb-3">Add elements or create subdivisions</h5>
+      <div class="text-center temp-layer">
+        <div class="template" border="3">
+          <div class="cells" *ngFor="let row of selectedTemp.data; let rowIndex = index">
+            <div class="cell" *ngFor="let cell of row; let cellIndex = index" data-toggle="modal" (click)="showCellModal(cell, rowIndex, cellIndex)">
+              <table class="cell-chart">
+                <tr *ngFor="let i of [0, 1, 2]">
+                  <td *ngFor="let j of [0, 1, 2]" class="small" [class.selected]="j < cell.type[0] && i < cell.type[1]"></td>
+                </tr>
+              </table>
+              <div class="panel" *ngFor="let j of getRepeatList(cell.type[1])" [style.height]="100/cell.type[1] + '%'">
+                <div class="pull-left area" *ngFor="let i of getRepeatList(cell.type[0])" [style.width]="100/cell.type[0] + '%'" [style.height]="'100%'"></div>
+              </div>
+            </div>
+            <a class="last-add-btn" href="javascript:void(0)" (click)="addNewCellInRow(rowIndex)"><i class="fa fa-plus"></i></a>
+          </div>
+        </div>
+      </div>
+
+      <div class="bottom-bar pr-1 pl-1">
+        <a class="select-another pull-left text-uppercase text-center mb-0" href="javascript:void(0)" (click)="selectAnotherTemp()">Select Another <br>Template</a>
+        <a class="check-template pull-right text-uppercase" href="javascript:void(0)" (click)="checkUpTemp()">
+          <i class="material-icons">check</i> Ready
+        </a>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div bsModal #cellModal="bs-modal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="cellModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-lg cabinet-modal" role="document">
+    <div class="modal-content">
+      <div class="modal-body">
+        <h4 class="modal-title thin-word-2">Change element subdivisions</h4>
+        <h6 class="text-muted thin-word-2 mb-2">WARNING: changing an element's subdivision will remove its contents!</h6>
+        <h2 class="text-center" *ngIf="tempCell.type">{{tempCell.type[0]}} x {{tempCell.type[1]}}</h2>
+        <table class="cell-chart mb-2" *ngIf="tempCell.type">
+          <tr *ngFor="let i of [0, 1, 2]">
+            <td *ngFor="let j of [0, 1, 2]" class="large clickable" [class.selected]="j < tempCell.type[0] && i < tempCell.type[1]" (click)="previewSubdiv(i, j)"></td>
+          </tr>
+        </table>
+        <button type="button" class="close" (click)="cellModal.hide()" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+        <div class="footer">
+          <a class="cancel pull-left text-uppercase" href="javascript:void(0)" (click)="cancel()">Cancel <i class="material-icons">clear</i></a>
+          <a class="update pull-right text-uppercase" href="javascript:void(0)" (click)="updateSubdivisions()">Update&nbsp;&nbsp;&nbsp;<i class="material-icons">check</i></a>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

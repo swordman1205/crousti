@@ -1,0 +1,52 @@
+<div class="header">
+  <div class="pull-left">
+    <select class="form-control pull-left ml-2">
+      <option>Top 10 products</option>
+      <option>New products</option>
+      <option>Baguettes and half baguettes</option>
+      <option>Small rolls</option>
+    </select>
+  </div>
+  <div class="pull-right">
+    <a class="close-btn pull-right" href="javascript:void(0)" (click)="close()"><i class="material-icons">clear</i></a>
+    <div class="row pull-right">
+      <div class="col-xs-12 search-box">
+        <input class="form-control" placeholder="Search"/>
+        <i class="icon-magnifier icons"></i>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="container mt-2">
+  <div class="row">
+    <div class="col-sm-8">
+      <div class="row product-gallery">
+        <div class="col-xs-6 col-sm-4 col-md-3 product" *ngFor="let product of products">
+          <div class="card" [class.active]="selectedProduct == product" (click)="selectedProduct = product">          
+            <div class="card-block">
+              <img [src]="product.thumbnail"/>
+              <p class="name mb-0">{{product.name}}</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="col-sm-4 product-detail">
+      <div class="card">
+        <div class="card-block">
+          <img [src]="selectedProduct.thumbnail"/>
+          <div class="detail">
+            <div class="background"></div>
+            <p class="name mb-0">{{selectedProduct.name}}</p>
+            <p class="description mb-0 text-muted">{{selectedProduct.description}}</p>
+          </div>
+        </div>
+      </div>
+      <div class="text-right">
+        <p class="mb-0"><strong>Price</strong> €{{selectedProduct.price}}</p>
+        <p class="mb-0"><strong>Margin</strong> {{selectedProduct.margin}}</p>
+        <a class="add-to-cabinet text-uppercase" href="javascript:void(0)" (click)="addToCabinet()">Add To Cabinet<i class="material-icons ml-1">check</i></a>
+      </div>
+    </div>
+  </div>
+</div>

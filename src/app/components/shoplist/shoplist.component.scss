@@ -1,0 +1,31 @@
+.add-new {
+  display: -webkit-flex;
+  display: flex;
+
+  .card {
+    width: 100%;
+
+    .card-block {
+      display: flex;
+      -webkit-justify-content: center;
+      justify-content: center;
+      -webkit-flex-direction: column;
+      flex-direction: column;
+    }
+  }
+}
+.card {
+  cursor: pointer;
+  &.horizontal {
+    -webkit-flex-direction: row;
+    flex-direction: row;
+
+    img {
+      height: 12vw;
+    }
+  }
+  &.vertical {
+    -webkit-flex-direction: column;
+    flex-direction: column;
+  }
+}

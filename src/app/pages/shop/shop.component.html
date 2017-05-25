@@ -1,0 +1,50 @@
+<header class="navbar pr-2 pl-2">
+  <h5 class="thin-word-2 mt-1 mb-0">{{shop.name}}</h5>
+  <a class="nav navbar-nav ml-auto home" routerLink="/"><i class="fa fa-home"></i></a>
+</header>
+<div class="container detail-panel">
+  <div class="cabinet-list pt-2">
+    <h6 class="thin-word-2 mb-2">Select a cabinet below</h6>
+    <ul class="nav nav-tab">
+      <li class="cabinet p-1" *ngFor="let cabinet of shop.cabinets" [class.active]="cabinet == selectedCabinet" (click)="selectedCabinet = cabinet">
+        <div class="row">
+          <div class="col-sm-12">
+            <h6 class="thin-word-2 mb-0">{{cabinet.name}}</h6>
+            <span class="text-muted thin-word-2">Created on {{cabinet.create_at}}</span>
+          </div>
+        </div>
+      </li>
+    </ul>
+    <div class="text-center text-muted mt-1">
+      <a class="add-new" [routerLink]="['cabinet', 'add']"><i class="glyphicons glyphicons-plus-sign x2"></i></a>
+    </div>
+  </div>
+  <div class="card cabinet-detail mb-0">
+    <div class="card-block">
+      <h4 class="title thin-word-2">{{selectedCabinet.name}}</h4>
+      <h6 class="sub-title thin-word-2 text-muted mb-3">Created on {{selectedCabinet.create_at}}</h6>
+      <div class="text-center temp-layer">
+        <table class="template">
+          <tr class="cells" *ngFor="let row of selectedCabinet.template.data; let rowIndex = index">
+            <td class="cell" *ngFor="let cell of row; let cellIndex = index">
+              <div class="panel" *ngFor="let j of getRepeatList(cell.type[1])" [style.height]="100/cell.type[1] + '%'">
+                <div class="pull-left area" *ngFor="let i of getRepeatList(cell.type[0])" [style.width]="100/cell.type[0] + '%'" [style.height]="'100%'">
+                  <div class="product" *ngIf="cell.content">
+                    <img [hidden]="!cell.content[j][i]" [src]="cell.content[j][i]" [class.horizontal]="cell.type[0] >= cell.type[1]" [class.vertical]="cell.type[0] < cell.type[1]"/>
+                  </div>
+                </div>
+              </div>
+            </td>
+          </tr>
+        </table>
+      </div>
+
+      <div class="bottom-bar pr-1 pl-1">
+        <a class="delete-cabinet pull-left text-uppercase text-center mb-0" href="javascript:void(0)" (click)="deleteCabinet()">
+          <i class="material-icons">clear</i>Delete
+        </a>
+        <a class="new-configuration pull-right text-uppercase text-center" [routerLink]="['cabinet', 'detail']">New From<br>This Cabinet</a>
+      </div>
+    </div>
+  </div>
+</div>

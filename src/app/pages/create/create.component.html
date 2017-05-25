@@ -1,0 +1,58 @@
+<div class="container" *ngIf="step == 1">
+  <div class="new-shop">
+    <div class="header">
+      <div class="title">
+        <h2 class="thin-word-1">Add a new shop</h2>
+        <h5 class="text-muted thin-word-2">Complete the form below to add a new shop</h5>
+      </div>
+    </div>
+    <div class="card mt-2 mb-1">
+      <div class="card-block">
+        <form class="form-horizontal" [formGroup]="shopForm">
+          <div class="row">
+            <div class="col-lg-6 offset-lg-3 mt-2 mb-1">
+              <div class="form-group row mb-3 mt-3">
+                <label class="col-md-3 form-control-label" for="search-name">Shop name</label>
+                <div class="col-md-9 search-box">
+                  <input type="text" id="search-name" class="form-control" placeholder="Search a shop" [formControl]="shopForm.controls['name']">
+                  <i class="fa fa-search"></i>
+                </div>
+              </div>
+              <div class="form-group row">
+                <label class="col-md-3 form-control-label" for="shop-type">Shop type</label>
+                <div class="col-md-9">
+                  <div class="checkbox">
+                    <label for="checkbox1">
+                      <input type="checkbox" id="checkbox1" checked [formControl]="shopForm.controls['type1']"> On the go
+                    </label>
+                  </div>
+                  <div class="checkbox">
+                    <label for="checkbox2">
+                      <input type="checkbox" id="checkbox2" [formControl]="shopForm.controls['type2']"> Replenishment
+                    </label>
+                  </div>
+                  <div class="checkbox">
+                    <label for="checkbox3">
+                      <input type="checkbox" id="checkbox3" [formControl]="shopForm.controls['type3']"> Treasure hunt
+                    </label>
+                  </div>
+                </div>
+              </div>
+              <div class="alert alert-danger" *ngIf="warning">{{warning}}</div>
+            </div>
+          </div>
+        </form>      
+      </div>
+    </div>
+    <div class="links">
+      <a class="pull-left text-uppercase" routerLink="/">Cancel <i class="material-icons">clear</i></a>
+      <a class="pull-right text-uppercase" href="javascript:void(0)" (click)="cabinetCreation()">Create a cabinet <i class="icon-arrow-right icons"></i></a>
+    </div>
+  </div>
+</div>
+<div class="new-cabinet" *ngIf="step == 2">
+  <cabinet-template [shopName]="shop.name" (onSelect)="onSelectTemplate($event)"></cabinet-template>
+</div>
+<div class="cabinet-config" *ngIf="step == 3">
+  <cabinet-configuration [shopName]="shop.name" [cabinet]="cabinet" (onAddCabinet)="addCabinet($event)" (cancelStep)="step = 2"></cabinet-configuration>
+</div>

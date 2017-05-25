@@ -1,0 +1,36 @@
+.search-box {
+  i {
+    position: absolute;
+    top: 9px;
+    right: 25px;
+    color: #aaa;
+    z-index: 100;
+    font-size: 16px;
+  }
+}
+label.form-control-label {
+  font-size: 17px;
+}
+.links {
+  a {
+    color: #666;
+    text-decoration: none;
+    position: relative;
+    &:first-child i {
+      position: absolute;
+      top: 0;
+      right: -25px;
+      z-index: 1;
+    }
+  }
+}
+.new-shop {
+  display: -webkit-inline-flex;
+  display: inline-flex;
+  -webkit-flex-direction: column;
+  flex-direction: column;
+  width: 100%;
+  -webkit-justify-content: center;
+  justify-content: center;
+  height: 100vh;
+}

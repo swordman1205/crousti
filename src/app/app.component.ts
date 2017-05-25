@@ -1,4 +1,7 @@
 import { Component } from '@angular/core';
+import { Router, NavigationStart } from '@angular/router';
+
+import { LoginService } from './services';
 
 @Component({
   selector: 'app-root',
@@ -6,5 +9,20 @@ import { Component } from '@angular/core';
   styleUrls: ['./app.component.scss']
 })
 export class AppComponent {
-  title = 'app works!';
+  constructor(private router:Router, private loginService:LoginService) {
+    this.watchRouteChange();
+  }
+
+  watchRouteChange() {
+    this.router.events.subscribe((val) => {
+        if (val instanceof NavigationStart) {
+          if (val.url === '/login' && this.loginService.isLoggedIn()) {
+             this.router.navigateByUrl('/');
+          }
+          if (val.url !== '/login' && !this.loginService.isLoggedIn()) {
+             this.router.navigateByUrl('/login');
+          }
+        }
+    });
+  }
 }

@@ -1,0 +1,53 @@
+// Here you can add other styles
+input.ng-invalid.ng-touched {
+    border: 1px solid orangered;
+}
+
+.thin-word-1 {
+    font-weight: 300;
+}
+
+.thin-word-2 {
+    font-weight: 400;
+}
+
+.fade.in {
+  opacity: 1;
+}
+
+.modal.in .modal-dialog {
+  -webkit-transform: translate(0, 0);
+  -o-transform: translate(0, 0);
+  transform: translate(0, 0);
+}
+
+.modal-backdrop.in {
+  opacity: 0.5;
+}
+
+table.cell-chart {
+  border-collapse: initial;
+
+  td {
+    background-color: #aaa;
+
+    &.selected {
+      background-color: darkblue;
+    }
+
+    &.small {
+      width: 6px;
+      min-width: 6px;
+      height: 6px;
+    }
+
+    &.large {
+      width: 60px;
+      height: 60px;
+    }
+
+    &.clickable {
+      cursor: pointer;
+    }
+  }
+}

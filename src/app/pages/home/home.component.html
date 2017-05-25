@@ -1,0 +1,50 @@
+<navbar></navbar>
+<div class="container pt-2">
+  <div class="header">
+    <div class="title pull-left">
+      <h2 class="thin-word-1">Select a shop below</h2>
+      <h5 class="text-muted thin-word-2">or create a new one</h5>
+    </div>
+    <form class="form-horizontal pull-right mt-1">
+      <div class="form-group row">
+        <div class="col-md-12">
+          <div class="input-group search-box">
+            <input type="text" class="form-control" placeholder="Search a shop" [(ngModel)]="searchTerm" [ngModelOptions]="{debounce: 500, standalone: true}" (ngModelChange)="applySearch()">
+            <i class="fa fa-search" *ngIf="!searchTerm"></i>
+            <i class="fa fa-times close-search" *ngIf="searchTerm" (click)="clearSearch()"></i>
+          </div>
+        </div>
+      </div>
+    </form>
+  </div>
+  <div class="nearest-shops mt-1" *ngIf="!searchResultLoaded">
+    <div class="header-line mb-2">
+      <span class="text-uppercase">Nearest shops</span>
+      <div class="divider ml-1"></div>
+      <span class="ml-1">Sort by location&nbsp;<i class="icon-arrow-down icons"></i></span>
+    </div>
+    <shop-list
+      [items]="nearestShops"
+      cardType="horizontal"
+      maxLine="2"></shop-list>
+  </div>
+  <div class="other-shops mt-1" *ngIf="!searchResultLoaded">
+    <div class="header-line mb-2">
+      <span class="text-uppercase">Other shops nearby</span>
+      <div class="divider ml-1"></div>
+    </div>
+    <shop-list
+      [items]="otherShops"
+      cardType="vertical"
+      maxLine="4"
+      insertable="1"></shop-list>
+  </div>
+
+  <div class="search-result mt-1" *ngIf="searchResultLoaded">
+    <shop-list
+      [items]="searchList"
+      cardType="vertical"
+      maxLine="4"
+      insertable="0"></shop-list>
+  </div>
+</div>
