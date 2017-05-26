@@ -1,5 +1,4 @@
 header {
-  z-index: 1;
   a.home {
     font-size: 22px;
     text-decoration: none;
@@ -55,8 +54,16 @@ header {
               .area {
                 border-right: 1px solid #000;
                 cursor: pointer;
+                position: relative;
                 &:last-child {
                   border-right: 0;
+                }
+                .colored-bottom {
+                  position: absolute;
+                  height: 10px;
+                  width: 100%;
+                  bottom: 0;
+                  z-index: 1;
                 }
                 .product {
                   display: -webkit-inline-flex;
@@ -139,6 +146,7 @@ header {
   -webkit-box-shadow: 0px -1px 15px 0px rgba(0, 0, 0, 0.5);
   -moz-box-shadow: 0px -1px 15px 0px rgba(0, 0, 0, 0.5);
   box-shadow: 0px -1px 15px 0px rgba(0, 0, 0, 0.5);
+  z-index: 2;
 
   &.active {
     bottom: 0;

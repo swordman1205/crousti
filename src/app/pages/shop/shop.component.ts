@@ -29,7 +29,7 @@ export class ShopComponent implements OnInit {
             ], 
             [
               { 
-                type: [1,2] 
+                type: [1,3] 
               },
               { 
                 type: [1,2] 
@@ -199,5 +199,11 @@ export class ShopComponent implements OnInit {
     });
     this.shop.cabinets.splice(index, 1);
     this.selectedCabinet = this.shop.cabinets[index]? this.shop.cabinets[index] : this.shop.cabinets[0];
+  }
+
+  getColor(rowIndex, colIndex) {
+    var colors = ['pink', '#ffff7f', 'greenyellow', 'lightskyblue', 'sandybrown', 'lightgrey'];
+    var index = this.selectedCabinet.length * rowIndex + colIndex;
+    return colors[index]? colors[index] : colors[0];
   }
 }

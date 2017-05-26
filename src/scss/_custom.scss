@@ -25,6 +25,10 @@ input.ng-invalid.ng-touched {
   opacity: 0.5;
 }
 
+header.navbar {
+  z-index: 2;
+}
+
 table.cell-chart {
   border-collapse: initial;
 

@@ -81,4 +81,10 @@ export class CabinetConfigurationComponent {
       this.onAddCabinet.emit(this.cabinet);
     }
   }
+
+  getColor(rowIndex, colIndex) {
+    var colors = ['pink', '#ffff7f', 'greenyellow', 'lightskyblue', 'sandybrown', 'lightgrey'];
+    var index = this.cabinet.length * rowIndex + colIndex;
+    return colors[index]? colors[index] : colors[0];
+  }
 }
