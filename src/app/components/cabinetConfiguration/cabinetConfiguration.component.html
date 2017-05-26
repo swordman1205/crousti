@@ -17,20 +17,7 @@
 
       <p class="mt-3 text-muted">Select a slot to change its contents</p>
       <div class="text-center temp-layer">
-        <table class="template">
-          <tr class="cells" *ngFor="let row of cabinet.template.data; let rowIndex = index">
-            <td class="cell" *ngFor="let cell of row; let cellIndex = index">
-              <div class="panel" *ngFor="let j of getRepeatList(cell.type[1])" [style.height]="100/cell.type[1] + '%'">
-                <div class="pull-left area" *ngFor="let i of getRepeatList(cell.type[0])" [style.width]="100/cell.type[0] + '%'" [style.height]="'100%'" (click)="assingProduct($event, rowIndex, cellIndex, j, i)">
-                  <div class="colored-bottom" [style.backgroundColor]="getColor(rowIndex, cellIndex)"></div>
-                  <div class="product" *ngIf="cell.content">
-                    <img [hidden]="!cell.content[j][i]" [src]="cell.content[j][i]" [class.horizontal]="cell.type[0] >= cell.type[1]" [class.vertical]="cell.type[0] < cell.type[1]"/>
-                  </div>
-                </div>
-              </div>
-            </td>
-          </tr>
-        </table>
+        <template-drawer [data]="cabinet.template.data" size="large" tempMode="showContent" assignable="true" [cabinetLength]="cabinet.length" (onAddProduct)="assignProduct($event)"></template-drawer>
       </div>
 
       <div class="bottom-bar pr-1 pl-1">

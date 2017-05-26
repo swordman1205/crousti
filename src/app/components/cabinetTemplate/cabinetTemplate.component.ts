@@ -9,65 +9,17 @@ export class CabinetTemplateComponent {
   @Input() shopName: string;
   @Output() onSelect: EventEmitter<any> = new EventEmitter<any>(); 
 
-  cabinetLength:number;
+  cabinetLength:number = 3;
   verticalUnit: number = 2;
   
   @ViewChild('cellModal') cellModal: any;
 
   templates:any = [
     {
-      name: 'Cabinet Type A',
-      data: [
-        [
-          { 
-            type: [1,2] 
-          },
-          { 
-            type: [1,2] 
-          },
-          { 
-            type: [1,2] 
-          }
-        ], 
-        [
-          { 
-            type: [1,2] 
-          },
-          { 
-            type: [1,2] 
-          },
-          { 
-            type: [1,2] 
-          }
-        ]
-      ]
+      name: 'Cabinet Type A'
     },
     {
-      name: 'Cabinet Type B',
-      data: [
-        [
-          { 
-            type: [1,2] 
-          },
-          { 
-            type: [1,2] 
-          },
-          { 
-            type: [1,2] 
-          }
-        ], 
-        [
-          { 
-            type: [2,1] 
-          },
-          { 
-            type: [1,2] 
-          },
-          { 
-            type: [1,2] 
-          }
-        ]
-      ]
+      name: 'Cabinet Type B'
     }
   ];
   selectedTemp:any = {};
@@ -75,14 +27,27 @@ export class CabinetTemplateComponent {
   tempCell:any = {};
   step:number = 1;
 
-  constructor() {}
+  constructor() {
+    this.assignData();
+  }
 
-  getRepeatList(n) {
-    var tempList = [];
-    for (var i = 0; i < n; i++) {
-      tempList.push(i);
+  assignData() {
+    this.templates[0].data = [[], []];
+    this.templates[1].data = [[], []];
+    for (let i = 0; i < this.cabinetLength; i++) {
+      this.templates[0].data[0].push({
+        type: [1,2]
+      });
+      this.templates[0].data[1].push({
+        type: [1,2]
+      });
+      this.templates[1].data[0].push({
+        type: [2,1]
+      });
+      this.templates[1].data[1].push({
+        type: [2,1]
+      });
     }
-    return tempList;
   }
 
   selectTemplate(template) {
@@ -101,10 +66,13 @@ export class CabinetTemplateComponent {
     this.selectedTemp = {};
   }
 
-  addNewCellInRow(rowIndex) {
-    this.selectedTemp.data[rowIndex].push({
-      type: [1,2]
+  addNewCellInRow() {
+    this.selectedTemp.data.forEach(row => {
+      row.push({
+        type: [1,2]
+      });
     });
+    this.cabinetLength++;
   }
 
   checkUpTemp() {
@@ -115,10 +83,10 @@ export class CabinetTemplateComponent {
     });
   }
 
-  showCellModal(cell, rowIndex, cellIndex) {
-    this.selectedCell = [rowIndex, cellIndex];
+  showCellModal(event) {
+    this.selectedCell = [event.rowIndex, event.cellIndex];
     this.tempCell = {
-      type: [cell.type[0], cell.type[1]]
+      type: [event.cell.type[0], event.cell.type[1]]
     };
     this.cellModal.show();
   }
@@ -137,5 +105,15 @@ export class CabinetTemplateComponent {
     this.selectedTemp.data[this.selectedCell[0]][this.selectedCell[1]] = {
       type: [this.tempCell.type[0], this.tempCell.type[1]]
     };
+  }
+
+  changeLength() {
+    if (!this.cabinetLength) {
+      alert('The length of cabinet is required!');
+    } else if (this.cabinetLength < 1 || this.cabinetLength > 10) {
+      alert('The length of cabinet should be between 1 and 10.');
+    } else {
+      this.assignData();
+    }
   }
 }

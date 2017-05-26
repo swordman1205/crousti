@@ -19,15 +19,12 @@ export class CabinetConfigurationComponent {
 
   constructor() {}
 
-  getRepeatList(n) {
-    var tempList = [];
-    for (var i = 0; i < n; i++) {
-      tempList.push(i);
-    }
-    return tempList;
-  }
-
-  assingProduct(event, rowIndex, cellIndex, subRowIndex, subCellIndex) {
+  assignProduct($event) {
+    var event = $event.$event;
+    var rowIndex = $event.rowIndex;
+    var cellIndex = $event.cellIndex;
+    var subRowIndex = $event.j;
+    var subCellIndex = $event.i;
     event.stopPropagation();
 
     if (!this.isAssigning) {
@@ -80,11 +77,5 @@ export class CabinetConfigurationComponent {
     } else {
       this.onAddCabinet.emit(this.cabinet);
     }
-  }
-
-  getColor(rowIndex, colIndex) {
-    var colors = ['pink', '#ffff7f', 'greenyellow', 'lightskyblue', 'sandybrown', 'lightgrey'];
-    var index = this.cabinet.length * rowIndex + colIndex;
-    return colors[index]? colors[index] : colors[0];
   }
 }

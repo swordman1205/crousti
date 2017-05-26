@@ -24,20 +24,7 @@
       <h4 class="title thin-word-2">{{selectedCabinet.name}}</h4>
       <h6 class="sub-title thin-word-2 text-muted mb-3">Created on {{selectedCabinet.create_at}}</h6>
       <div class="text-center temp-layer">
-        <table class="template">
-          <tr class="cells" *ngFor="let row of selectedCabinet.template.data; let rowIndex = index">
-            <td class="cell" *ngFor="let cell of row; let cellIndex = index">
-              <div class="panel" *ngFor="let j of getRepeatList(cell.type[1])" [style.height]="100/cell.type[1] + '%'">
-                <div class="pull-left area" *ngFor="let i of getRepeatList(cell.type[0])" [style.width]="100/cell.type[0] + '%'" [style.height]="'100%'">
-                  <div class="colored-bottom" [style.backgroundColor]="getColor(rowIndex, cellIndex)"></div>
-                  <div class="product" *ngIf="cell.content">
-                    <img [hidden]="!cell.content[j][i]" [src]="cell.content[j][i]" [class.horizontal]="cell.type[0] >= cell.type[1]" [class.vertical]="cell.type[0] < cell.type[1]"/>
-                  </div>
-                </div>
-              </div>
-            </td>
-          </tr>
-        </table>
+        <template-drawer [data]="selectedCabinet.template.data" size="large" tempMode="showContent" [cabinetLength]="selectedCabinet.length"></template-drawer>
       </div>
 
       <div class="bottom-bar pr-1 pl-1">

@@ -3,3 +3,4 @@ export * from './shoplist';
 export * from './cabinetTemplate';
 export * from './cabinetConfiguration';
 export * from './productCollector';
+export * from './templateDrawer';

@@ -185,25 +185,11 @@ export class ShopComponent implements OnInit {
     });
   }
 
-  getRepeatList(n) {
-    var tempList = [];
-    for (var i = 0; i < n; i++) {
-      tempList.push(i);
-    }
-    return tempList;
-  }
-
   deleteCabinet() {
     var index = this.shop.cabinets.findIndex((cabinet) => {
       return cabinet == this.selectedCabinet;
     });
     this.shop.cabinets.splice(index, 1);
     this.selectedCabinet = this.shop.cabinets[index]? this.shop.cabinets[index] : this.shop.cabinets[0];
-  }
-
-  getColor(rowIndex, colIndex) {
-    var colors = ['pink', '#ffff7f', 'greenyellow', 'lightskyblue', 'sandybrown', 'lightgrey'];
-    var index = this.selectedCabinet.length * rowIndex + colIndex;
-    return colors[index]? colors[index] : colors[0];
   }
 }

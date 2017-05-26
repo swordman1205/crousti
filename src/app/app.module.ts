@@ -21,7 +21,8 @@ import {
   ShopListComponent,
   CabinetTemplateComponent,
   CabinetConfigurationComponent,
-  ProductCollectorComponent
+  ProductCollectorComponent,
+  TemplateDrawerComponent
 } from './components';
 
 import { 
@@ -44,7 +45,8 @@ import {
     ShopListComponent,
     CabinetTemplateComponent,
     CabinetConfigurationComponent,
-    ProductCollectorComponent
+    ProductCollectorComponent,
+    TemplateDrawerComponent
   ],
   imports: [
     BrowserModule,
