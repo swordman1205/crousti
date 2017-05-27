@@ -10,7 +10,7 @@
 <div class="editable-layout" *ngIf="tempMode == 'editable'">
   <table class="template">
     <tr class="cells" *ngFor="let row of data; let rowIndex = index">
-      <td class="cell clickable {{size}}" *ngFor="let cell of row; let cellIndex = index" (click)="showCellModal(cell, rowIndex, cellIndex)">
+      <td class="cell clickable {{size}}" [style.width]="(winHeight/verticalUnit - 300/verticalUnit) + 'px'" [style.height]="(winHeight/verticalUnit - 300/verticalUnit) + 'px'" *ngFor="let cell of row; let cellIndex = index" (click)="showCellModal(cell, rowIndex, cellIndex)">
         <table class="cell-chart">
           <tr *ngFor="let i of [0, 1, 2]">
             <td *ngFor="let j of [0, 1, 2]" class="small" [class.selected]="j < cell.type[0] && i < cell.type[1]"></td>
@@ -26,7 +26,7 @@
 </div>
 <table class="template" *ngIf="tempMode == 'showContent'">
   <tr class="cells" *ngFor="let row of data; let rowIndex = index">
-    <td class="cell {{size}}" *ngFor="let cell of row; let cellIndex = index">
+    <td class="cell {{size}}" [style.width]="(winHeight/verticalUnit - 300/verticalUnit) + 'px'" [style.height]="(winHeight/verticalUnit - 300/verticalUnit) + 'px'" *ngFor="let cell of row; let cellIndex = index">
       <div class="panel" *ngFor="let j of getRepeatList(cell.type[1])" [style.height]="100/cell.type[1] + '%'">
         <div class="pull-left area" [class.clickable]="assignable" *ngFor="let i of getRepeatList(cell.type[0])" [style.width]="100/cell.type[0] + '%'" [style.height]="'100%'" (click)="assignProduct($event, rowIndex, cellIndex, j, i)">
           <div class="colored-bottom" [style.backgroundColor]="getColor(rowIndex, cellIndex)"></div>

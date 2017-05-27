@@ -175,13 +175,48 @@ export class ShopComponent implements OnInit {
   selectedCabinet: any;
   shopId:any;
 
-  constructor(private activatedRoute:ActivatedRoute) {
-    this.selectedCabinet = this.shop.cabinets[0];
-  }
+  constructor(private activatedRoute:ActivatedRoute) {}
 
   ngOnInit() {
     this.activatedRoute.params.subscribe((params: Params) => {
       this.shopId = params['id'];
+      if (this.shopId == 'temp') {
+        this.shop.cabinets = [
+          {
+            name: 'New Cabinet',
+            create_at: '20/05/2017',
+            length: 3,
+            unit: 2,
+            template: {
+              data: [
+                [
+                  { 
+                    type: [2,1] 
+                  },
+                  { 
+                    type: [1,2] 
+                  },
+                  { 
+                    type: [3,2] 
+                  }
+                ], 
+                [
+                  { 
+                    type: [1,2] 
+                  },
+                  { 
+                    type: [2,2] 
+                  },
+                  { 
+                    type: [1,2] 
+                  }
+                ]
+              ]
+            }
+          }
+        ];
+      }
+      this.selectedCabinet = this.shop.cabinets[0];
     });
   }
 

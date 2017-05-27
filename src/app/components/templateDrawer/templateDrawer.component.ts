@@ -11,12 +11,15 @@ export class TemplateDrawerComponent {
   @Input() tempMode:string;
   @Input() assignable:boolean;
   @Input() cabinetLength:number;
+  @Input() verticalUnit:number;
   @Output() onCellClick:EventEmitter<any> = new EventEmitter<any>();
   @Output() onAddColumn:EventEmitter<any> = new EventEmitter<any>();
   @Output() onAddProduct:EventEmitter<any> = new EventEmitter<any>();
 
-  constructor() {
+  winHeight:number;
 
+  constructor() {
+    this.winHeight = window.innerHeight;
   }
 
   getRepeatList(n) {
@@ -53,7 +56,7 @@ export class TemplateDrawerComponent {
     var colors = ['pink', '#ffff7f', 'greenyellow', 'lightskyblue', 'sandybrown', 'lightgrey'];
     var index = this.cabinetLength * rowIndex + colIndex;
     if (index > colors.length - 1) {
-      return colors[index - colors.length];
+      return colors[index % colors.length];
     } else {
       return colors[index];
     }

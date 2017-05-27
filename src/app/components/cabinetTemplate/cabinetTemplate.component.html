@@ -46,7 +46,7 @@
       <h4 class="title thin-word-2">Customize your cabinet</h4>
       <h5 class="sub-title thin-word-2 text-muted mb-3">Add elements or create subdivisions</h5>
       <div class="text-center temp-layer">
-        <template-drawer [data]="selectedTemp.data" size="large" tempMode="editable" (onCellClick)="showCellModal($event)" (onAddColumn)="addNewCellInRow()"></template-drawer>
+        <template-drawer [data]="selectedTemp.data" size="large" tempMode="editable" [verticalUnit]="verticalUnit" (onCellClick)="showCellModal($event)" (onAddColumn)="addNewCellInRow()"></template-drawer>
       </div>
 
       <div class="bottom-bar pr-1 pl-1">

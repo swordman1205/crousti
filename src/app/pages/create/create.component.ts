@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
+import { Router } from '@angular/router';
 
 @Component({
   templateUrl: './create.component.html',
@@ -12,7 +13,7 @@ export class CreateComponent {
   shop:any = {};
   cabinet:any = {};
 
-  constructor(private fb: FormBuilder) {
+  constructor(private fb: FormBuilder, private router:Router) {
     this.shopForm = fb.group({
       'name' : [null, Validators.required],
       'type1': [false],
@@ -50,6 +51,6 @@ export class CreateComponent {
     } else {
       this.shop.cabinets.push(this.cabinet);
     }
-    this.step = 1;
+    this.router.navigate(['/shop', 'temp']);
   }
 }

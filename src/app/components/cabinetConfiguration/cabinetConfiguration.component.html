@@ -17,7 +17,7 @@
 
       <p class="mt-3 text-muted">Select a slot to change its contents</p>
       <div class="text-center temp-layer">
-        <template-drawer [data]="cabinet.template.data" size="large" tempMode="showContent" assignable="true" [cabinetLength]="cabinet.length" (onAddProduct)="assignProduct($event)"></template-drawer>
+        <template-drawer [data]="cabinet.template.data" size="large" tempMode="showContent" assignable="true" [cabinetLength]="cabinet.length" [verticalUnit]="cabinet.unit" (onAddProduct)="assignProduct($event)"></template-drawer>
       </div>
 
       <div class="bottom-bar pr-1 pl-1">

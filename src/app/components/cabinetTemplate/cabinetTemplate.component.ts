@@ -67,12 +67,14 @@ export class CabinetTemplateComponent {
   }
 
   addNewCellInRow() {
-    this.selectedTemp.data.forEach(row => {
-      row.push({
+    let newRow = [];
+    for (let i = 0; i < this.cabinetLength; i++) {
+      newRow.push({
         type: [1,2]
       });
-    });
-    this.cabinetLength++;
+    }
+    this.selectedTemp.data.push(newRow);
+    this.verticalUnit++;
   }
 
   checkUpTemp() {
