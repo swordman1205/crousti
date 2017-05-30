@@ -12,8 +12,10 @@ export class TemplateDrawerComponent {
   @Input() assignable:boolean;
   @Input() cabinetLength:number;
   @Input() verticalUnit:number;
+  @Input() showSize:boolean;
   @Output() onCellClick:EventEmitter<any> = new EventEmitter<any>();
   @Output() onAddColumn:EventEmitter<any> = new EventEmitter<any>();
+  @Output() onAddRow:EventEmitter<any> = new EventEmitter<any>();
   @Output() onAddProduct:EventEmitter<any> = new EventEmitter<any>();
 
   winHeight:number;
@@ -42,13 +44,18 @@ export class TemplateDrawerComponent {
     this.onAddColumn.emit();
   }
 
+  addNewRow() {
+    this.onAddRow.emit();
+  }
+
   assignProduct($event, rowIndex, cellIndex, j, i) {
     this.onAddProduct.emit({
       $event: $event,
       rowIndex: rowIndex,
       cellIndex: cellIndex,
       i: i,
-      j: j
+      j: j,
+      color: this.getColor(rowIndex, cellIndex)
     });
   }
 

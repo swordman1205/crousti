@@ -25,7 +25,7 @@ export class HomeComponent {
       this.nearestShops = res;
     });
 
-    this.shopService.getNearbyList().subscribe((res:Shop[]) => {
+    this.shopService.getOtherList().subscribe((res:Shop[]) => {
       this.otherShops = res;
     });
   }

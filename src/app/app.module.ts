@@ -3,6 +3,7 @@ import { NgModule } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpModule } from '@angular/http';
 import { BsDropdownModule, ModalModule } from 'ng2-bootstrap';
+import { SelectModule } from 'ng2-select';
 
 import { routing, appRoutingProviders } from './app.routes';
 
@@ -13,7 +14,8 @@ import {
   CreateComponent,
   ShopComponent,
   AddCabinetComponent,
-  EditCabinetComponent
+  EditCabinetComponent,
+  EditTemplateComponent
 } from './pages';
 
 import { 
@@ -40,6 +42,7 @@ import {
     ShopComponent,
     AddCabinetComponent,
     EditCabinetComponent,
+    EditTemplateComponent,
     // components
     NavbarComponent,
     ShopListComponent,
@@ -55,6 +58,7 @@ import {
     HttpModule,
     BsDropdownModule.forRoot(),
     ModalModule.forRoot(),
+    SelectModule,
     routing
   ],
   providers: [

@@ -18,8 +18,10 @@
         <div class="col-sm-6">
           <div class="input-group flex-vertical-center">
             <span class="mr-1">Vertical units</span>
-            <select class="form-control col-sm-6" [(ngModel)]="verticalUnit">
+            <select class="form-control col-sm-6" [(ngModel)]="verticalUnit" (ngModelChange)="changeVerticalUnit()">
               <option value="2">2</option>
+              <option value="3">3</option>
+              <option value="4">4</option>
             </select>
           </div>
         </div>
@@ -46,7 +48,7 @@
       <h4 class="title thin-word-2">Customize your cabinet</h4>
       <h5 class="sub-title thin-word-2 text-muted mb-3">Add elements or create subdivisions</h5>
       <div class="text-center temp-layer">
-        <template-drawer [data]="selectedTemp.data" size="large" tempMode="editable" [verticalUnit]="verticalUnit" (onCellClick)="showCellModal($event)" (onAddColumn)="addNewCellInRow()"></template-drawer>
+        <template-drawer [data]="selectedTemp.data" size="large" tempMode="editable" [verticalUnit]="verticalUnit" (onCellClick)="showCellModal($event)" (onAddColumn)="addNewCellInRow()" (onAddRow)="addRow()"></template-drawer>
       </div>
 
       <div class="bottom-bar pr-1 pl-1">

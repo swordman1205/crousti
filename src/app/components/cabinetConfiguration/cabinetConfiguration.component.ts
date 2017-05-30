@@ -17,6 +17,8 @@ export class CabinetConfigurationComponent {
   selectedCell:any;
   subDivPosition:any = {};
 
+  modalColor:string;
+
   constructor() {}
 
   assignProduct($event) {
@@ -30,6 +32,8 @@ export class CabinetConfigurationComponent {
     if (!this.isAssigning) {
       this.selectedCell = this.cabinet.template.data[rowIndex][cellIndex];
       this.subDivPosition = [subRowIndex, subCellIndex];
+
+      this.modalColor = $event.color;
 
       if (!this.selectedCell.content) {
         let content = [];

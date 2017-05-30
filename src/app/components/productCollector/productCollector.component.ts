@@ -6,6 +6,7 @@ import { Component, Input, Output, EventEmitter } from '@angular/core';
   styleUrls: ['./productCollector.component.scss']
 })
 export class ProductCollectorComponent {
+  @Input() color:string;
   @Output() cancel:EventEmitter<any> = new EventEmitter<any>();
   @Output() onAddProduct:EventEmitter<any> = new EventEmitter<any>();
 

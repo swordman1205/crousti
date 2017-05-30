@@ -1,5 +1,5 @@
 <div class="new-cabinet" *ngIf="step == 1">
-  <cabinet-template [shopName]="shop.name" (onSelect)="onSelectTemplate($event)"></cabinet-template>
+  <cabinet-template [shopName]="shop.name" (onSelect)="onSelectTemplate($event)" step="1"></cabinet-template>
 </div>
 <div class="cabinet-config" *ngIf="step == 2">
   <cabinet-configuration [shopName]="shop.name" [cabinet]="cabinet" (onAddCabinet)="addCabinet($event)" (cancelStep)="step = 1"></cabinet-configuration>

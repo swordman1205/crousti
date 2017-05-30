@@ -1,6 +1,9 @@
 import { Component } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
+import { SelectComponent } from 'ng2-select';
+
+import { ShopService } from '../../services';
 
 @Component({
   templateUrl: './create.component.html',
@@ -13,19 +16,26 @@ export class CreateComponent {
   shop:any = {};
   cabinet:any = {};
 
-  constructor(private fb: FormBuilder, private router:Router) {
+  titles:any = [];
+
+  constructor(private fb: FormBuilder, private router:Router, private shopService:ShopService) {
     this.shopForm = fb.group({
       'name' : [null, Validators.required],
       'type1': [false],
       'type2': [false],
       'type3': [false]
     });
+
+    this.shopService.search('').subscribe((response:any) => {
+      response.forEach((item:any) => {
+        this.titles.push(item.name);
+      });
+    });
   }
 
   cabinetCreation() {
-    if (this.shopForm.valid) {
+    if (this.shop.name) {
       this.warning = '';
-      this.shop.name = this.shopForm.value.name;
       this.shop.types = [
         this.shopForm.value.type1,
         this.shopForm.value.type2,
@@ -52,5 +62,9 @@ export class CreateComponent {
       this.shop.cabinets.push(this.cabinet);
     }
     this.router.navigate(['/shop', 'temp']);
+  }
+
+  selected(event) {
+    this.shop.name = event.text;
   }
 }

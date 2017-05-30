@@ -21,10 +21,11 @@
   </div>
   <div class="card cabinet-detail mb-0">
     <div class="card-block">
+      <button class="btn btn-info pull-right" [routerLink]="['edit']">Edit Template</button>
       <h4 class="title thin-word-2">{{selectedCabinet.name}}</h4>
       <h6 class="sub-title thin-word-2 text-muted mb-3">Created on {{selectedCabinet.create_at}}</h6>
       <div class="text-center temp-layer">
-        <template-drawer [data]="selectedCabinet.template.data" size="large" tempMode="showContent" [cabinetLength]="selectedCabinet.length" [verticalUnit]="selectedCabinet.unit"></template-drawer>
+        <template-drawer [data]="selectedCabinet.template.data" size="large" tempMode="showContent" [cabinetLength]="selectedCabinet.length" [verticalUnit]="selectedCabinet.unit" showSize="true"></template-drawer>
       </div>
 
       <div class="bottom-bar pr-1 pl-1">

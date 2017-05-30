@@ -14,8 +14,11 @@
               <div class="form-group row mb-3 mt-3">
                 <label class="col-md-3 form-control-label" for="search-name">Shop name</label>
                 <div class="col-md-9 search-box">
-                  <input type="text" id="search-name" class="form-control" placeholder="Search a shop" [formControl]="shopForm.controls['name']">
-                  <i class="fa fa-search"></i>
+                  <ng-select
+                    [items]="titles"
+                    (selected)="selected($event)"
+                    placeholder="Search a shop">
+                  </ng-select>
                 </div>
               </div>
               <div class="form-group row">
@@ -45,13 +48,13 @@
       </div>
     </div>
     <div class="links">
-      <a class="pull-left text-uppercase" routerLink="/">Cancel <i class="material-icons">clear</i></a>
-      <a class="pull-right text-uppercase" href="javascript:void(0)" (click)="cabinetCreation()">Create a cabinet <i class="icon-arrow-right icons"></i></a>
+      <a class="btn btn-danger pull-left text-uppercase" routerLink="/">Cancel <i class="material-icons">clear</i></a>
+      <a class="btn btn-info pull-right text-uppercase" href="javascript:void(0)" (click)="cabinetCreation()">Create a cabinet <i class="icon-arrow-right icons"></i></a>
     </div>
   </div>
 </div>
 <div class="new-cabinet" *ngIf="step == 2">
-  <cabinet-template [shopName]="shop.name" (onSelect)="onSelectTemplate($event)"></cabinet-template>
+  <cabinet-template [shopName]="shop.name" (onSelect)="onSelectTemplate($event)" step="1"></cabinet-template>
 </div>
 <div class="cabinet-config" *ngIf="step == 3">
   <cabinet-configuration [shopName]="shop.name" [cabinet]="cabinet" (onAddCabinet)="addCabinet($event)" (cancelStep)="step = 2"></cabinet-configuration>

@@ -2,9 +2,13 @@
   display: inline-block;
   position: relative;
 
+  .template {
+    padding-right: 30px;
+  }
+
   a.last-add-btn {
     position: absolute;
-    right: -25px;
+    right: 0;
     top: 0;
     width: 20px;
     background-color: #ddd;
@@ -14,6 +18,42 @@
     align-items: center;
     justify-content: center;
     text-decoration: none;
+  }
+
+  a.add-row-btn {
+    position: absolute;
+    bottom: -25px;
+    height: 20px;
+    left: 0;
+    right: 30px;
+    background-color: #ddd;
+    color: white;
+  }
+}
+.show-content.show-size {
+  position: relative;
+  display: inline-block;
+
+  .template {
+    padding-right: 10px;
+  }
+
+  span.cabinet-length {
+    position: absolute;
+    right: 0;
+    left: 0;
+    bottom: -15px;
+  }
+
+  span.vertical-unit {
+    position: absolute;
+    top: 0;
+    right: -15px;
+    bottom: 5px;
+    display: -webkit-inline-flex;
+    display: inline-flex;
+    -webkit-align-items: center;
+    align-items: center;    
   }
 }
 .template {

@@ -33,5 +33,5 @@
 </div>
 
 <div class="assignModal" [class.active]="isAssigning">
-  <product-collector (cancel)="reset()" (onAddProduct)="addProduct($event)"></product-collector>
+  <product-collector [color]="modalColor" (cancel)="reset()" (onAddProduct)="addProduct($event)"></product-collector>
 </div>

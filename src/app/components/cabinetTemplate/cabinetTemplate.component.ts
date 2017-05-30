@@ -1,12 +1,14 @@
-import { Component, Input, Output, ViewChild, EventEmitter } from '@angular/core';
+import { Component, Input, Output, ViewChild, EventEmitter, OnInit } from '@angular/core';
 
 @Component({
   selector: 'cabinet-template',
   templateUrl: './cabinetTemplate.component.html',
   styleUrls: ['./cabinetTemplate.component.scss']
 })
-export class CabinetTemplateComponent {
+export class CabinetTemplateComponent implements OnInit {
   @Input() shopName: string;
+  @Input() step:number;
+  @Input() template:any;
   @Output() onSelect: EventEmitter<any> = new EventEmitter<any>(); 
 
   cabinetLength:number = 3;
@@ -20,33 +22,60 @@ export class CabinetTemplateComponent {
     },
     {
       name: 'Cabinet Type B'
+    },
+    {
+      name: 'Cabinet Type C'
+    },
+    {
+      name: 'Cabinet Type D'
     }
   ];
   selectedTemp:any = {};
   selectedCell:any = {};
   tempCell:any = {};
-  step:number = 1;
 
   constructor() {
     this.assignData();
   }
 
+  ngOnInit() {
+    if (this.template) {
+      this.selectedTemp = this.template;
+    }
+  }
+
   assignData() {
-    this.templates[0].data = [[], []];
-    this.templates[1].data = [[], []];
+    for (let i = 0; i < this.templates.length; i++) {
+      this.templates[i].data = [];
+      for (let j = 0; j < this.verticalUnit; j++) {
+        this.templates[i].data.push([]);
+      }
+    }
+
     for (let i = 0; i < this.cabinetLength; i++) {
-      this.templates[0].data[0].push({
-        type: [1,2]
-      });
-      this.templates[0].data[1].push({
-        type: [1,2]
-      });
-      this.templates[1].data[0].push({
-        type: [2,1]
-      });
-      this.templates[1].data[1].push({
-        type: [2,1]
-      });
+      for (let j = 0; j < this.verticalUnit; j++) {
+        this.templates[0].data[j].push({
+          type: [1,2]
+        });
+      }
+
+      for (let j = 0; j < this.verticalUnit; j++) {
+        this.templates[1].data[j].push({
+          type: [2,1]
+        });
+      }
+
+      for (let j = 0; j < this.verticalUnit; j++) {
+        this.templates[2].data[j].push({
+          type: [2,3]
+        });
+      }
+
+      for (let j = 0; j < this.verticalUnit; j++) {
+        this.templates[3].data[j].push({
+          type: [3,2]
+        });
+      }
     }
   }
 
@@ -67,13 +96,22 @@ export class CabinetTemplateComponent {
   }
 
   addNewCellInRow() {
-    let newRow = [];
-    for (let i = 0; i < this.cabinetLength; i++) {
-      newRow.push({
+    for (let i = 0; i < this.verticalUnit; i++) {
+      this.selectedTemp.data[i].push({
         type: [1,2]
       });
     }
-    this.selectedTemp.data.push(newRow);
+    this.cabinetLength++;
+  }
+
+  addRow() {
+    let tempRow = [];
+    for (let i = 0; i < this.cabinetLength; i++) {
+      tempRow.push({
+        type: [1,2]
+      });
+    }
+    this.selectedTemp.data.push(tempRow);
     this.verticalUnit++;
   }
 
@@ -117,5 +155,9 @@ export class CabinetTemplateComponent {
     } else {
       this.assignData();
     }
+  }
+
+  changeVerticalUnit() {
+    this.assignData();
   }
 }

@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute, Params } from '@angular/router';
+import { ActivatedRoute, Params, Router } from '@angular/router';
 
 @Component({
   templateUrl: './shop.component.html',
@@ -175,7 +175,7 @@ export class ShopComponent implements OnInit {
   selectedCabinet: any;
   shopId:any;
 
-  constructor(private activatedRoute:ActivatedRoute) {}
+  constructor(private activatedRoute:ActivatedRoute, private router:Router) {}
 
   ngOnInit() {
     this.activatedRoute.params.subscribe((params: Params) => {

@@ -23,18 +23,23 @@
     </tr>
   </table>
   <a class="last-add-btn" href="javascript:void(0)" (click)="addNewCellInRow()"><i class="fa fa-plus"></i></a>
+  <a class="add-row-btn" href="javascript:void(0)" (click)="addNewRow()"><i class="fa fa-plus"></i></a>
 </div>
-<table class="template" *ngIf="tempMode == 'showContent'">
-  <tr class="cells" *ngFor="let row of data; let rowIndex = index">
-    <td class="cell {{size}}" [style.width]="(winHeight/verticalUnit - 300/verticalUnit) + 'px'" [style.height]="(winHeight/verticalUnit - 300/verticalUnit) + 'px'" *ngFor="let cell of row; let cellIndex = index">
-      <div class="panel" *ngFor="let j of getRepeatList(cell.type[1])" [style.height]="100/cell.type[1] + '%'">
-        <div class="pull-left area" [class.clickable]="assignable" *ngFor="let i of getRepeatList(cell.type[0])" [style.width]="100/cell.type[0] + '%'" [style.height]="'100%'" (click)="assignProduct($event, rowIndex, cellIndex, j, i)">
-          <div class="colored-bottom" [style.backgroundColor]="getColor(rowIndex, cellIndex)"></div>
-          <div class="product" *ngIf="cell.content">
-            <img [hidden]="!cell.content[j][i]" [src]="cell.content[j][i]" [class.horizontal]="cell.type[0] >= cell.type[1]" [class.vertical]="cell.type[0] < cell.type[1]"/>
+<div class="show-content" *ngIf="tempMode == 'showContent'" [class.show-size]="showSize">
+  <table class="template">
+    <tr class="cells" *ngFor="let row of data; let rowIndex = index">
+      <td class="cell {{size}}" [style.width]="(winHeight/verticalUnit - 300/verticalUnit) + 'px'" [style.height]="(winHeight/verticalUnit - 300/verticalUnit) + 'px'" *ngFor="let cell of row; let cellIndex = index">
+        <div class="panel" *ngFor="let j of getRepeatList(cell.type[1])" [style.height]="100/cell.type[1] + '%'">
+          <div class="pull-left area" [class.clickable]="assignable" *ngFor="let i of getRepeatList(cell.type[0])" [style.width]="100/cell.type[0] + '%'" [style.height]="'100%'" (click)="assignProduct($event, rowIndex, cellIndex, j, i)">
+            <div class="colored-bottom" [style.backgroundColor]="getColor(rowIndex, cellIndex)"></div>
+            <div class="product" *ngIf="cell.content">
+              <img [hidden]="!cell.content[j][i]" [src]="cell.content[j][i]" [class.horizontal]="cell.type[0] >= cell.type[1]" [class.vertical]="cell.type[0] < cell.type[1]"/>
+            </div>
           </div>
         </div>
-      </div>
-    </td>
-  </tr>
-</table>
+      </td>
+    </tr>
+  </table>
+  <span class="cabinet-length" *ngIf="showSize">{{cabinetLength}}m</span>
+  <span class="vertical-unit" *ngIf="showSize">{{verticalUnit}}m</span>
+</div>

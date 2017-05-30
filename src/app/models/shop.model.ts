@@ -4,5 +4,5 @@ export interface Shop {
   address: string;
   zipcode: number;
   city: string;
-  thumbnail: string;
+  logo: string;
 }
