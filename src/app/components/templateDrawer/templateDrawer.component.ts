@@ -19,9 +19,11 @@ export class TemplateDrawerComponent {
   @Output() onAddProduct:EventEmitter<any> = new EventEmitter<any>();
 
   winHeight:number;
+  colors:any;
 
   constructor() {
     this.winHeight = window.innerHeight;
+    this.colors = ['pink', '#ffff7f', 'greenyellow', 'lightskyblue', 'sandybrown', 'lightgrey'];
   }
 
   getRepeatList(n) {
@@ -59,13 +61,29 @@ export class TemplateDrawerComponent {
     });
   }
 
-  getColor(rowIndex, colIndex) {
-    var colors = ['pink', '#ffff7f', 'greenyellow', 'lightskyblue', 'sandybrown', 'lightgrey'];
-    var index = this.cabinetLength * rowIndex + colIndex;
-    if (index > colors.length - 1) {
-      return colors[index % colors.length];
-    } else {
-      return colors[index];
+  getTotalColorList() {
+    var colorList = [];
+
+    var total = this.cabinetLength * this.verticalUnit;
+    var repeatedNum = Math.floor(total / this.colors.length);
+
+    var reminder = total % this.colors.length;
+
+    for (let i = 0; i < this.colors.length; i++) {
+      for (let j = 0; j < repeatedNum; j++) {
+        colorList.push(i);
+      }
+      if (reminder > 0) {
+        colorList.push(i);
+        reminder--;
+      }
     }
+
+    return colorList;
+  }
+
+  getColor(rowIndex, colIndex) {
+    var index = this.cabinetLength * rowIndex + colIndex;
+    return this.colors[this.getTotalColorList()[index]];
   }
 }

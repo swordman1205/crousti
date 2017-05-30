@@ -1,4 +1,13 @@
 // Here you can add other styles
+
+@font-face {
+  font-family: 'FranklinGothicDemiCondRegular';
+  src: url('../assets/fonts/FranklinGothicDemiCondRegular.ttf');
+  src: url('../assets/fonts/FranklinGothicDemiCondRegular.ttf') format('truetype');
+  font-weight: normal;
+  font-style: normal;
+}
+
 input.ng-invalid.ng-touched {
     border: 1px solid orangered;
 }
@@ -54,4 +63,11 @@ table.cell-chart {
       cursor: pointer;
     }
   }
+}
+
+.custom-title {
+  font-family: FranklinGothicDemiCondRegular;
+  color: #e08d39;
+  text-transform: uppercase;
+  font-size: 43px;
 }

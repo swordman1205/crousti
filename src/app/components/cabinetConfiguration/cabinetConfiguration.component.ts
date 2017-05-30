@@ -49,10 +49,10 @@ export class CabinetConfigurationComponent {
 
       let divPos = event.y - event.offsetY + event.srcElement.clientHeight + 20;
 
-      if (window.innerHeight/2 > divPos) {
+      if (window.innerHeight * 0.4 > divPos) {
         this.offsetPos = 0;
       } else {
-        this.offsetPos = window.innerHeight/2 - divPos;
+        this.offsetPos = window.innerHeight * 0.4 - divPos;
       }
       this.isAssigning = true;
     } else {

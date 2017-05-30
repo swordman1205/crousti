@@ -32,7 +32,7 @@
   .card {
     margin-bottom: 5px;
     .card-block {
-      height: 25vh;
+      height: 30vh;
       overflow: hidden;
       padding: 0;
 
@@ -85,8 +85,8 @@
 }
 
 .product-gallery {
-  height: -webkit-calc(50vh - 100px);
-  height: calc(50vh - 100px);
+  height: -webkit-calc(60vh - 140px);
+  height: calc(60vh - 140px);
   overflow-y: auto;
 
   .product {
