@@ -35,7 +35,7 @@ input.ng-invalid.ng-touched {
 }
 
 header.navbar {
-  z-index: 2;
+  z-index: 101;
 }
 
 table.cell-chart {
@@ -45,7 +45,7 @@ table.cell-chart {
     background-color: #aaa;
 
     &.selected {
-      background-color: darkblue;
+      background-color: #e08d39;
     }
 
     &.small {

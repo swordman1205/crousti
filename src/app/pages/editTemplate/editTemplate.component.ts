@@ -52,6 +52,6 @@ export class EditTemplateComponent implements OnInit {
   }
 
   onSelectTemplate(event) {
-    this.router.navigate(['/shop', this.shop.id]);
+    this.router.navigate(['/shop', this.shop.id, 'cabinet', 'detail']);
   }
 }
