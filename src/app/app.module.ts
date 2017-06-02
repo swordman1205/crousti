@@ -4,6 +4,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpModule } from '@angular/http';
 import { BsDropdownModule, ModalModule } from 'ng2-bootstrap';
 import { SelectModule } from 'ng2-select';
+import { ChartsModule } from 'ng2-charts';
 
 import { routing, appRoutingProviders } from './app.routes';
 
@@ -59,6 +60,7 @@ import {
     BsDropdownModule.forRoot(),
     ModalModule.forRoot(),
     SelectModule,
+    ChartsModule,
     routing
   ],
   providers: [

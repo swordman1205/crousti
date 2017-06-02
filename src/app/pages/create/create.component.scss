@@ -11,6 +11,21 @@
 label.form-control-label {
   font-size: 17px;
 }
+.shop-type {
+  .checkbox label {
+    display: flex;
+    align-items: center;
+
+    i {
+      color: #e08d39;
+      margin-right: 10px;
+    }
+
+    input {
+      margin-right: 10px;
+    }
+  }
+}
 .links {
   a {
     text-decoration: none;

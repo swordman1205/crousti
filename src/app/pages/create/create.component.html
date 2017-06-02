@@ -6,50 +6,118 @@
         <h5 class="text-muted thin-word-2">Complete the form below to add a new shop</h5>
       </div>
     </div>
-    <div class="card mt-2 mb-1">
+    <div class="card paddedforchart mt-2 mb-1">
       <div class="card-block">
         <form class="form-horizontal" [formGroup]="shopForm">
           <div class="row">
-            <div class="col-lg-6 offset-lg-3 mt-2 mb-1">
-              <div class="form-group row mb-3 mt-3">
+            <div class="col-lg-8 offset-lg-2 mt-1">
+              <!-- Shop Name -->
+              <!--<div class="form-group row mb-3 mt-3">-->
+              <div class="form-group row mt-1">
                 <label class="col-md-3 form-control-label" for="search-name">Shop name</label>
                 <div class="col-md-9 search-box">
+                  <input
+                    type="text"
+                    id="search-name"
+                    formControlName="name"
+                    class="form-control"
+                    (change)="selectShopName($event)">
+                  <!--<ng-select-->
+                  <!--[items]="titles"-->
+                  <!--[(ngModel)]="shop.name"-->
+                  <!--(selected)="selected($event)"-->
+                  <!--placeholder="Search a shop">-->
+                  <!--</ng-select>-->
+                </div>
+              </div>
+
+              <!-- Shop Country -->
+              <div class="form-group row mt-2">
+                <label class="col-md-3 form-control-label" for="location">Shop Country</label>
+                <div class="col-md-9">
                   <ng-select
-                    [items]="titles"
-                    (selected)="selected($event)"
-                    placeholder="Search a shop">
+                    [items]="itemsCountries"
+                    [allowClear]="true"
+                    (selected)="selectCountry($event)"
+                    placeholder="Select a country">
                   </ng-select>
                 </div>
               </div>
-              <div class="form-group row">
-                <label class="col-md-3 form-control-label" for="shop-type">Shop type</label>
+
+              <!-- Shop Region -->
+              <div class="form-group row mt-2" *ngIf="isBelgium()">
+                <label class="col-md-3 form-control-label" for="location">Shop Region</label>
                 <div class="col-md-9">
-                  <div class="checkbox">
-                    <label for="checkbox1">
-                      <input type="checkbox" id="checkbox1" checked [formControl]="shopForm.controls['type1']"> On the go
+                  <ng-select
+                    [allowClear]="true"
+                    [items]="itemsRegions"
+                    (selected)="selectRegion($event)"
+                    placeholder="Select a region">
+                  </ng-select>
+                </div>
+              </div>
+
+              <!-- Shop Type 1 -->
+              <div class="form-group shop-type row mt-2">
+                <label class="col-md-3 form-control-label" for="shop-type">Shop type</label>
+                <div class="col-md-6">
+                  <div class="checkbox mb-1">
+                    <label for="typeslider1">
+                      <i class="fa fa-shopping-basket fa-2x fa-fw" aria-hidden="true"></i>
+                      <input type="number" id="typeslider1" name="typeslider1" [min]="typeDistribution.minType1"
+                             [max]="typeDistribution.maxType1"
+                             (change)="updateChart()"
+                             [(ngModel)]="doughnutChartData[0]"
+                             [formControl]="shopForm.controls['typeslider1']"> On the go
+                    </label>
+                  </div>
+                  <div class="checkbox mb-1">
+                    <label for="typeslider2">
+                      <i class="fa fa-shopping-cart fa-2x fa-fw" aria-hidden="true"></i>
+                      <input type="number" id="typeslider2" name="typeslider2" [min]="typeDistribution.minType2"
+                             [max]="typeDistribution.maxType2"
+                             (change)="updateChart()"
+                             [(ngModel)]="doughnutChartData[1]"
+                             [formControl]="shopForm.controls['typeslider2']"> Replenishment
                     </label>
                   </div>
                   <div class="checkbox">
-                    <label for="checkbox2">
-                      <input type="checkbox" id="checkbox2" [formControl]="shopForm.controls['type2']"> Replenishment
-                    </label>
-                  </div>
-                  <div class="checkbox">
-                    <label for="checkbox3">
-                      <input type="checkbox" id="checkbox3" [formControl]="shopForm.controls['type3']"> Treasure hunt
+                    <label for="typeslider3">
+                      <i class="fa fa-briefcase fa-2x fa-fw" aria-hidden="true"></i>
+                      <input type="number" id="typeslider3" name="typeslider3" [min]="typeDistribution.minType3"
+                             style="widows: 20px;"
+                             [max]="typeDistribution.maxType3"
+                             (change)="updateChart()"
+                             [(ngModel)]="doughnutChartData[2]"
+                             [formControl]="shopForm.controls['typeslider3']"> Treasure hunt
                     </label>
                   </div>
                 </div>
+                <div class="col-md-3">
+                  <div class="chart-wrapper">
+                    <canvas baseChart
+                            [options]="chartOptions"
+                            height="160"
+                            class="chart"
+                            [data]="doughnutChartData"
+                            [labels]="doughnutChartLabels"
+                            [chartType]="doughnutChartType"
+                            (chartHover)="chartHovered($event)"
+                            (chartClick)="chartClicked($event)"></canvas>
+                  </div>
+                </div>
               </div>
+
               <div class="alert alert-danger" *ngIf="warning">{{warning}}</div>
             </div>
           </div>
-        </form>      
+        </form>
       </div>
     </div>
     <div class="links">
       <a class="btn btn-danger pull-left text-uppercase" routerLink="/">Cancel <i class="material-icons">clear</i></a>
-      <a class="btn btn-info pull-right text-uppercase" href="javascript:void(0)" (click)="cabinetCreation()">Create a cabinet <i class="icon-arrow-right icons"></i></a>
+      <a class="btn btn-info pull-right text-uppercase" href="javascript:void(0)" (click)="cabinetCreation()">Create a
+        cabinet <i class="icon-arrow-right icons"></i></a>
     </div>
   </div>
 </div>
@@ -57,5 +125,6 @@
   <cabinet-template [shopName]="shop.name" (onSelect)="onSelectTemplate($event)" step="1"></cabinet-template>
 </div>
 <div class="cabinet-config" *ngIf="step == 3">
-  <cabinet-configuration [shopName]="shop.name" [cabinet]="cabinet" (onAddCabinet)="addCabinet($event)" (cancelStep)="step = 2"></cabinet-configuration>
+  <cabinet-configuration [shopName]="shop.name" [cabinet]="cabinet" (onAddCabinet)="addCabinet($event)"
+                         (cancelStep)="step = 2"></cabinet-configuration>
 </div>
